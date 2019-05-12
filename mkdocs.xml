@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <site_name>Model Tax Convention on Income and on Capital</site_name>
+    <theme>
+        <name>material</name>
+        <favicon>img/favicon.ico</favicon>
+        <logo>img/logo.png</logo>
+        <palette>
+            <primary>blue</primary>
+            <accent>blue</accent>
+        </palette>
+        <feature>
+            <tabs>true</tabs>
+        </feature>
+    </theme>
+    <markdown_extensions>
+        <_item>footnotes</_item>
+        <_item>
+            <toc>
+                <permalink>true</permalink>
+            </toc>
+        </_item>
+    </markdown_extensions>
+</config>
