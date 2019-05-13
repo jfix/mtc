@@ -2,7 +2,7 @@
 
 ## How-to
 
-- Install Python
+- Install Python (don't forget proxy settings!)
 - Install Pip
 - Install Mkdocs
 - Install Material for Mkdocs
