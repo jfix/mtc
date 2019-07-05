@@ -12,6 +12,7 @@
 - Copy the two missing content files
 - Run `xslt/xml-to-markdown.xslt` to generate Markdown output
 - `mkdocs serve` to run development server
+- `mkdocs build` to create standalone copy of the site
 - Improve the XSLT to produce high-fidelity output
 
 
@@ -34,7 +35,7 @@
     - Chapter 1 = 7
   - Commentaries - C
     - Commentaries 1 - 32
-  - Positiions - P
+  - Positions - P
     - Intro
     - Positions 1 - 30
 ----
