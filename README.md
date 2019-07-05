@@ -2,8 +2,10 @@
 
 ## How-to
 
-- Install Python (don't forget proxy settings!)
-- Install Pip
+- Install Python and Pip (don't forget proxy settings!)
+  - `G:\>set http_proxy=http://[proxy.server]:80`
+  - `G:\>set https_proxy=http://[proxy.server]:80`
+  - use `--trusted-host pypi.org --trusted-host files.pythonhosted.org`
 - Install Mkdocs
 - Install Material for Mkdocs
 - Clone this repository
