@@ -25,6 +25,8 @@
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
+  <xsl:param name="language" select="//mtc/@language"/>
+  
   <!-- TODO: vol1 & vol2! -->
   <xsl:template match="/mtc/volume1">
     <!-- generate mkdocs.yml file -->
@@ -79,10 +81,33 @@
     <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
   
-  
   <xsl:template match="itemizedlist/listitem/para">
     <xsl:text>&#xa;&#xa;- </xsl:text>
     <xsl:apply-templates select="*|text()" />
     <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
+
+  <xsl:template match="orderedlist/listitem/para">
+    <xsl:variable name="item" select="concat(count(parent::listitem[preceding-sibling::listitem])+1,') ')"/>
+    <xsl:text>&#xa;&#xa;!!!! WTF !!!! </xsl:text>
+    <xsl:value-of select="$item"/><xsl:apply-templates select="*|text()" />
+    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+  </xsl:template>
+  
+  <xsl:template match="chapter/title"/>
+  
+  <xsl:template match="article/title">
+    <xsl:text>## </xsl:text>
+    <xsl:value-of select="concat(parent::article/@titleabbrev, '. ')"/>
+    <xsl:apply-templates select="*|text()" />
+    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+  </xsl:template>
+  
+  <xsl:template match="info">
+    <xsl:text>### </xsl:text>
+    <xsl:value-of select="if ($language='en') then ('HISTORY') else ('HISTORIQUE')"/>
+    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+    <xsl:apply-templates/>
+  </xsl:template>
+  
 </xsl:stylesheet>
