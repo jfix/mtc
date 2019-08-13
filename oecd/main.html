@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+<script>
+    // if screen width permits, load hypothesis sidebar
+    if (screen.width > 450) {
+        console.log(`OK, injecting hypothesis sidebar.`)
+        var head = document.getElementsByTagName('head')[0];
+        var js = document.createElement('script');
+        js.type = "text/javascript";
+        js.src = "https://hypothes.is/embed.js";
+        js.async = "true";
+        head.appendChild(js);
+    } else {
+        console.log(`On a small screen, no hypothesis for you.`);
+    }
+</script>
+{% endblock %}
