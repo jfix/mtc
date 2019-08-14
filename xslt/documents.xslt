@@ -57,14 +57,16 @@
     <xsl:template match="conventionmodel">
         <xsl:result-document href="{$vol1}/conventionmodel/index.md">
             <xsl:apply-templates select="* except chapter"/>
-            <xsl:apply-templates select=".//footnote" mode="footnote"/>               </xsl:result-document>
+            <xsl:apply-templates select=".//footnote" mode="footnote"/>
+        </xsl:result-document>
         <xsl:apply-templates select="chapter"/>
     </xsl:template>
     
     <xsl:template match="conventionmodel/chapter">
         <xsl:result-document href="{$vol1}/conventionmodel/{@id}.md">
             <xsl:apply-templates/>
-            <xsl:apply-templates select=".//footnote" mode="footnote"/>                  </xsl:result-document>
+            <xsl:apply-templates select=".//footnote" mode="footnote"/>
+        </xsl:result-document>
     </xsl:template>
         
     <!-- COMMENTARIES -->
