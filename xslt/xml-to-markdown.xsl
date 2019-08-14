@@ -6,14 +6,15 @@
     expand-text="yes"
     version="3.0">
     
-  <xsl:output method="text" />
+  <xsl:output method="xml" omit-xml-declaration="true"/>
   <xsl:strip-space elements="*" />
 
   <xsl:include href="mkdocs-x2y.xslt"/>
   <xsl:include href="inline.xslt"/>
   <xsl:include href="nav.xslt"/>
   <xsl:include href="documents.xslt"/>
-  <xsl:include href="functions.xsl"/>
+  <xsl:include href="table.xslt"/>
+  <xsl:include href="functions.xslt"/>
     
   <xsl:template match="@*|node()">
     <xsl:copy>
