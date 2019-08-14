@@ -6,7 +6,6 @@
     expand-text="yes"
     version="3.0">
     
-    <xsl:output method="text"/>
     <xsl:strip-space elements="*"/>
     
     <xsl:template match="config">
