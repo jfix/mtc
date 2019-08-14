@@ -29,6 +29,7 @@
         theme/name | 
         theme/favicon | 
         theme/logo |
+        theme/custom_dir |
         primary |
         accent |
         tabs | 
