@@ -6,3 +6,6 @@ docs/vol1
 mkdocs.yml
 # the generated output to be ignored
 site
+# grumpfh to ignore
+**/.DS_Store
+*.xpr

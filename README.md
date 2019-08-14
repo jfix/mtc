@@ -5,9 +5,10 @@
 - Install Python and Pip (don't forget proxy settings!)
   - `G:\>set http_proxy=http://[proxy.server]:80`
   - `G:\>set https_proxy=http://[proxy.server]:80`
-  - use `--trusted-host pypi.org --trusted-host files.pythonhosted.org`
 - Install Mkdocs
+  - `pip install mkdocs --trusted-host pypi.org --trusted-host files.pythonhosted.org` (using `cmd.exe`, powershell doesn't seem to work)
 - Install Material for Mkdocs
+  - `pip install mkdocs-material --trusted-host pypi.org --trusted-host files.pythonhosted.org` (using `cmd.exe`, powershell doesn't seem to work)
 - Clone this repository
 - Copy the two missing content files
 - Run `xslt/xml-to-markdown.xslt` to generate Markdown output
