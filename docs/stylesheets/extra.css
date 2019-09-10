@@ -1,0 +1,39 @@
+/* extra css */
+
+.md-typeset ol {
+    list-style: none;
+    padding:0;
+    margin:0;
+    counter-reset: listStyle;
+}
+
+.md-typeset ol li p:before {
+    content: counter(listStyle, lower-alpha) ") " ;
+    counter-increment: listStyle;
+    font-style: italic;
+    padding-right: 5px;
+}
+
+.md-typeset ol ol {
+    list-style: none;
+    padding:0;
+    margin:0;
+    counter-reset: listStyle;
+}
+
+.md-typeset ol ol li p:before {
+    content: "(" counter(listStyle, lower-roman) ") ";
+    counter-increment: listStyle;
+    font-style: italic;
+    padding-right: 5px;
+}
+
+ol li p { 
+    padding-left: 2em; 
+    text-indent: -1.5em;
+}
+
+ol ol li p { 
+    padding-left: 2em; 
+    text-indent: -1.5em;
+}

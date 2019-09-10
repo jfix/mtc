@@ -38,23 +38,68 @@
 
   <!-- block elements -->
   <xsl:template match="para[not(parent::footnote)]">
-    <xsl:if test="@number">
-      <xsl:variable name="number" select="replace(@number, '\.$', '\\.') || '  '"/>
-      <xsl:value-of select="$number"/>
-    </xsl:if>
-    <xsl:apply-templates/>
-    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+    <xsl:choose>
+      <xsl:when test="parent::listitem[parent::itemizedlist]">
+        <xsl:text>&#xa;&#xa;- </xsl:text>
+        <xsl:apply-templates select="*|text()" />
+        <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+      </xsl:when>
+      
+      <xsl:when test="parent::listitem[parent::orderedlist]">
+        <!--<xsl:variable name="item" select="concat(count(parent::listitem[preceding-sibling::listitem])+1,') ')"/>-->
+        <xsl:variable name="item" select="count(parent::listitem[preceding-sibling::listitem])+1"/>
+        <xsl:variable name="level">
+          <xsl:choose>
+            <xsl:when test="parent::listitem[parent::orderedlist[parent::listitem[parent::orderedlist]]]">2</xsl:when>
+            <xsl:otherwise>1</xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+
+        <xsl:if test="$item=1"><xsl:text>&#xa;&#xa;</xsl:text></xsl:if>
+        
+        <xsl:choose>
+          <xsl:when test="$level=1">
+1. <xsl:apply-templates select="*|text()" />
+            <!--<xsl:text>*</xsl:text>
+            <xsl:number format="a) " count="listitem"/>
+            <xsl:text>*</xsl:text>-->
+          </xsl:when>
+          <xsl:when test="$level=2">
+    1. <xsl:apply-templates select="*|text()" />
+            <!--<xsl:text>*</xsl:text>
+            <xsl:number format="i) " count="listitem"/>
+            <xsl:text>*</xsl:text>-->
+          </xsl:when>
+        </xsl:choose>
+
+        <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+      </xsl:when>
+      
+      <xsl:otherwise>
+        <xsl:if test="@number">
+          <xsl:variable name="number" select="replace(@number, '\.$', '\\.') || '  '"/>
+          <xsl:value-of select="$number"/>
+        </xsl:if>
+        <xsl:apply-templates/>
+        <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="
     introduction/title |
-    introduction/section/title |
     conventionmodel/title |
     commentary/title |
     position/title">
     <xsl:text># </xsl:text>
     <xsl:apply-templates select="*|text()" />
     <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->  
+  </xsl:template>
+ 
+  <xsl:template match="introduction/section/title">
+    <xsl:text># </xsl:text>
+    <xsl:apply-templates select="concat(parent::section/@number, ' ', *|text())" />
+    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
   
   <xsl:template match="introduction/section/section/title">
@@ -64,10 +109,12 @@
   </xsl:template>
   
   <xsl:template match="introduction/section/section/section/title">
-    <xsl:text>### </xsl:text>
-    <xsl:apply-templates select="*|text()" />
+    <!--<xsl:text>### </xsl:text>-->
+    <strong><xsl:apply-templates select="*|text()" /></strong>
     <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
+  
+  <xsl:template match="conventionmodel/titleabbrev"/>
   
   <xsl:template match="conventionmodel/preface/title">
     <xsl:text>## </xsl:text>
@@ -76,22 +123,9 @@
   </xsl:template>
 
   <xsl:template match="conventionmodel/preface/subtitle">
-    <xsl:text>### </xsl:text>
-    <xsl:apply-templates/>
-    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
-  </xsl:template>
-  
-  <xsl:template match="itemizedlist/listitem/para">
-    <xsl:text>&#xa;&#xa;- </xsl:text>
-    <xsl:apply-templates select="*|text()" />
-    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
-  </xsl:template>
-
-  <xsl:template match="orderedlist/listitem/para">
-    <xsl:variable name="item" select="concat(count(parent::listitem[preceding-sibling::listitem])+1,') ')"/>
-    <xsl:text>&#xa;&#xa;!!!! WTF !!!! </xsl:text>
-    <xsl:value-of select="$item"/><xsl:apply-templates select="*|text()" />
-    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+    <xsl:text>**</xsl:text>
+      <xsl:apply-templates/>
+    <xsl:text>**&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
   
   <xsl:template match="chapter/title"/>
@@ -103,11 +137,13 @@
     <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
   </xsl:template>
   
+  <xsl:template match="article/info/revhistory/title"/>
+
   <xsl:template match="info">
-    <xsl:text>### </xsl:text>
-    <xsl:value-of select="if ($language='en') then ('HISTORY') else ('HISTORIQUE')"/>
-    <xsl:text>&#xa;&#xa;</xsl:text> <!-- Block element -->
+    <xsl:text>**</xsl:text>
+      <xsl:value-of select="if ($language='en') then ('HISTORY') else ('HISTORIQUE')"/>
+    <xsl:text>**&#xa;&#xa;</xsl:text> <!-- Block element -->
     <xsl:apply-templates/>
   </xsl:template>
-  
+
 </xsl:stylesheet>
