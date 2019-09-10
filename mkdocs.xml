@@ -5,6 +5,7 @@
         <name>material</name>
         <favicon>img/favicon.ico</favicon>
         <logo>img/logo.png</logo>
+        <custom_dir>oecd</custom_dir>
         <palette>
             <primary>blue</primary>
             <accent>blue</accent>

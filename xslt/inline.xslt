@@ -5,7 +5,7 @@
     version="3.0">
     
     <!-- inline elements -->
-    <xsl:template match="emphasis[@emph='italic']">
+    <xsl:template match="country | emphasis[@emph='italic']">
         <xsl:if test="ends-with(preceding-sibling::text()[1], ' ')">
             <xsl:text> </xsl:text>
         </xsl:if>

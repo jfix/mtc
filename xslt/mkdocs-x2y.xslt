@@ -6,7 +6,6 @@
     expand-text="yes"
     version="3.0">
     
-    <xsl:output method="text"/>
     <xsl:strip-space elements="*"/>
     
     <xsl:template match="config">
@@ -29,6 +28,7 @@
         theme/name | 
         theme/favicon | 
         theme/logo |
+        theme/custom_dir |
         primary |
         accent |
         tabs | 

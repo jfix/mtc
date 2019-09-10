@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="21.0">
+<project version="20.1">
     <meta>
         <filters directoryPatterns="" filePatterns="\Qmtc-x2m.xpr\E" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="21.0" xml:space="preserve">
+            <serialized version="20.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>enable.project.master.files.support</String>
@@ -100,10 +100,10 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>file:/Users/jakob/Projects/mtc/xslt/xml-to-markdown.xsl</String>
+                                    <String>${pdu}/xslt/xml-to-markdown.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
-                                    <String>file:/Users/jakob/Projects/mtc/xml/mtc-vol-1.xml</String>
+                                    <String>${pdu}/xml/mtc-vol-1.xml</String>
                                 </field>
                                 <field name="defaultScenario">
                                     <Boolean>false</Boolean>
