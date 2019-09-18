@@ -63,8 +63,25 @@
         <xsl:variable name="lctitle" select="lower-case(title)"/>
         <xsl:variable name="title" select="l:uppercase-some-words($lctitle)"/>
         <xsl:value-of select="functx:repeat-string('  ', 3)"/>
+        <xsl:value-of>{"- '" || @titleabbrev || " - " || upper-case(substring($title, 1, 1)) || substring($title, 2) || "':&#xa;"}</xsl:value-of>
+        <xsl:apply-templates select="article" mode="nav"/>
+        <xsl:apply-templates select="articleset" mode="nav"/>
+    </xsl:template>
+    
+    <xsl:template match="conventionmodel/chapter/article" mode="nav">
+        <xsl:variable name="lctitle" select="lower-case(./title/text())"/>
+        <xsl:variable name="title" select="normalize-space(l:uppercase-some-words($lctitle))"/>
+        <xsl:value-of select="functx:repeat-string('  ', 4)"/>
         <xsl:value-of>{"- '" || @titleabbrev || " - " || upper-case(substring($title, 1, 1)) || substring($title, 2) || "': "}</xsl:value-of>
-        <xsl:value-of>{"'vol1/conventionmodel/" || @id || ".md'&#xa;"}</xsl:value-of>
+        <xsl:value-of>{"'vol1/conventionmodel/" || parent::chapter/@id || '/' || @id || ".md'&#xa;"}</xsl:value-of>
+    </xsl:template>
+    
+    <xsl:template match="conventionmodel/chapter/articleset/article" mode="nav">
+        <xsl:variable name="lctitle" select="lower-case(./title/text())"/>
+        <xsl:variable name="title" select="normalize-space(l:uppercase-some-words($lctitle))"/>
+        <xsl:value-of select="functx:repeat-string('  ', 4)"/>
+        <xsl:value-of>{"- '" || @titleabbrev || " - " || upper-case(substring($title, 1, 1)) || substring($title, 2) || "': "}</xsl:value-of>
+        <xsl:value-of>{"'vol1/conventionmodel/" || ancestor::chapter/@id || '/' || @id || ".md'&#xa;"}</xsl:value-of>
     </xsl:template>
     
     <xsl:function name="l:uppercase-some-words" as="xs:string">

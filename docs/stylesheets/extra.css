@@ -14,6 +14,11 @@
     padding-right: 5px;
 }
 
+.md-typeset ol li p { 
+    padding-left: 2em; 
+    text-indent: -1.5em;
+}
+
 .md-typeset ol ol {
     list-style: none;
     padding:0;
@@ -28,12 +33,49 @@
     padding-right: 5px;
 }
 
-ol li p { 
+.md-typeset ol ol li p { 
     padding-left: 2em; 
     text-indent: -1.5em;
 }
 
-ol ol li p { 
-    padding-left: 2em; 
-    text-indent: -1.5em;
+.md-typeset .footnote ol {
+    list-style: none;
+    padding:0;
+    margin:0;
+    counter-reset: listStyle;
+}
+
+.md-typeset .footnote ol li p:before {
+    content: counter(listStyle, decimal) ". " ;
+    counter-increment: listStyle;
+    font-style: normal;
+    padding-right: 5px;
+}
+
+.md-typeset .footnote ol li p { 
+    padding-left: 0; 
+    text-indent: 0;
+}
+
+.md-typeset h6{
+    font-size: .8rem;
+    line-height: 1.6;
+    color: rgba(0,0,0,.87);
+    font-feature-settings: "kern","liga";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:normal;
+}
+
+.md-typeset blockquote {
+    padding-left: .8rem;
+    border-left: none;
+}
+
+.md-typeset blockquote p {
+    font-size: .8rem;
+    line-height: 1.6;
+    color: rgba(0,0,0,.87);
+    font-feature-settings: "kern","liga";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight:normal;
 }

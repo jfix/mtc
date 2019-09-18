@@ -14,6 +14,7 @@
             <tabs>true</tabs>
         </feature>
     </theme>
+    <extra_css>stylesheets/extra.css</extra_css>
     <markdown_extensions>
         <_item>footnotes</_item>
         <_item>
@@ -21,5 +22,6 @@
                 <permalink>true</permalink>
             </toc>
         </_item>
+        <_item>attr_list</_item>
     </markdown_extensions>
 </config>

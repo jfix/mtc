@@ -30,16 +30,35 @@
             <xsl:text> </xsl:text>
         </xsl:if>
         <xsl:text>[</xsl:text>
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="ancestor::title[parent::commentary]">
+                <xsl:value-of select="upper-case(.)" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
         <!-- FIXME: real target for link -->
-        <xsl:text>]()</xsl:text>
+        <xsl:value-of select="concat('](#', @linkend), ')'"/>
         <xsl:if test="starts-with(following-sibling::text()[1], ' ')">
             <xsl:text> </xsl:text>
-        </xsl:if>    </xsl:template>
+        </xsl:if>    
+    </xsl:template>
     
     <xsl:template match="line">
-        <xsl:value-of select="normalize-space(.)"/>
-        <xsl:text>&#xa;</xsl:text> <!-- Line break -->
+        <xsl:choose>
+            <xsl:when test="parent::title[parent::commentary]">
+                <xsl:text># </xsl:text>
+                <xsl:apply-templates select="*|text()" />
+                <xsl:if test="following-sibling::line">
+                    <xsl:text>&#xa;&#xa;</xsl:text>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="normalize-space(.)"/>
+                <xsl:text>&#xa;&#xa;</xsl:text> <!-- Line break -->
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- inline footnote callouts -->

@@ -60,4 +60,13 @@
         <xsl:variable name="indent" select="'  '"/>
         <xsl:sequence select="string-join((for $i in 1 to $times return $indent), '')"/>
     </xsl:function>
+    
+    <xsl:template match="extra_css">
+        <xsl:value-of select="l:indent(.)"/>
+        <xsl:value-of select="name() || ':&#xa;'"/>
+        <xsl:text>- '</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>'</xsl:text>
+        <xsl:text>&#xa;</xsl:text>
+    </xsl:template>
 </xsl:stylesheet>

@@ -57,18 +57,32 @@
     <xsl:template match="conventionmodel">
         <xsl:result-document href="{$vol1}/conventionmodel/index.md">
             <xsl:apply-templates select="* except chapter"/>
-            <xsl:apply-templates select=".//footnote" mode="footnote"/>
+            <xsl:apply-templates select=".//preface//footnote" mode="footnote"/>
         </xsl:result-document>
         <xsl:apply-templates select="chapter"/>
     </xsl:template>
 
     <xsl:template match="conventionmodel/chapter">
-        <xsl:result-document href="{$vol1}/conventionmodel/{@id}.md">
+        <!--<xsl:result-document href="{$vol1}/conventionmodel/{@id}/index.md">-->
+            <xsl:apply-templates/>
+            <!--<xsl:apply-templates select=".//footnote" mode="footnote"/>-->
+        <!--</xsl:result-document>-->
+    </xsl:template>
+        
+    <xsl:template match="conventionmodel/chapter/article">
+        <xsl:result-document href="{$vol1}/conventionmodel/{parent::chapter/@id}/{@id}.md">
             <xsl:apply-templates/>
             <xsl:apply-templates select=".//footnote" mode="footnote"/>
         </xsl:result-document>
     </xsl:template>
-        
+    
+    <xsl:template match="conventionmodel/chapter/articleset/article">
+        <xsl:result-document href="{$vol1}/conventionmodel/{ancestor::chapter/@id}/{@id}.md">
+            <xsl:apply-templates/>
+            <xsl:apply-templates select=".//footnote" mode="footnote"/>
+        </xsl:result-document>
+    </xsl:template>
+    
     <!-- COMMENTARIES -->
     <xsl:template match="commentaries/commentary">
         <xsl:result-document href="{$vol1}/commentaries/{@id}.md">
